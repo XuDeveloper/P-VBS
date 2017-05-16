@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.pbox.pvbs.parent</groupId>
-  <artifactId>parent</artifactId>
+  <artifactId>group-pbox-pvbs-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>com.pbox.pvbs.parent</name>
-  <description>parent</description>
+  <description>group-pbox-pvbs-parent</description>
      <modules>
    <!-- 
     <module>simple-model</module>
@@ -14,7 +14,8 @@
 	<module>simple-webapp</module>
 	<module>simple-command</module>
 	 -->
-  </modules>
+   <module>group-pbox-pvbs-child</module>
+     </modules>
   <distributionManagement>
   <repository>
       <id>nexus</id>
