@@ -140,13 +140,13 @@ function mousdown(id){
 	$("#transactionLimit").val(user.transactionLimit);
 	$("#exchangeLimit").val(user.exchangeRateLimit);
 	$("#termDepositLimit").val(user.termDepositeLimit);
-	
+
 	var userName = $("#userName").val();
 	var userPosition = $("#userPosition").val();
 	var transactionLimit = $("#transactionLimit").val();
 	var exchangeLimit = $("#exchangeLimit").val();
 	var tdLimit = $("#termDepositLimit").val();
-	
+
 	var userId = user.userId;
 
 	var editInfo = {
@@ -168,15 +168,17 @@ function mousdown(id){
 		success : function(response) {
 			if(response.result == 00000 ){
 				$('#userInfor').empty();
-				$('#userInfor').append("Close succeed!");
+				$('#userInfor').append("Delete User succeed!");
+				$('#userInfor').removeAttr("onclick");
 			}
 			else {
 //				alert("Close fail! The balance is more than 0.Please check the balance.")
-				$('#userInfor').append("Close fail!");
+				$('#userInfor').append("Delete User fail!");
+				$('#userInfor').removeAttr("onclick");
 			}
 		},
 		error: function() {
-			$('#userInfor').append("Close fail!");
+			$('#userInfor').append("Net Error!");
 		}
 	
 	});
@@ -198,9 +200,5 @@ function editTest(id) {
 	document.getElementById("maintenance_content").style.display = 'none';
 	document.getElementById("edit_header").style.display = 'block';
 	document.getElementById("edit_content").style.display = 'block';
-
 }
-
-
-
 

@@ -49,8 +49,9 @@ var listData=[];
 function enquiryInfo(e,currentPage){
 	current = currentPage;
 	var transAccountNum = $("#transAccountNum").val();
-	var realAcctNum = $("#realAcctNum").val();
-	var json = {'transAccountNum' : transAccountNum,'depositNumber' : depositNumber,'operationCode' : 'TQ','params':{'pageRecorders':pageRecorders,'currentPage':currentPage}};
+	var depositNum = $("#depositNumber").val();
+	
+	var json = {'transAccountNum' : transAccountNum,'depositNumber' : depositNum,'operationCode' :'TQ'};
 	$.ajax({
 		url : contextPath+"/service/termDeposit/termDepositDepatcher",
 		type : "post",
@@ -68,7 +69,7 @@ function enquiryInfo(e,currentPage){
 					rec = rec+"<button id=\"closeAcct\" type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>";
 					rec = rec+"<i class=\"fa fa-info-circle\"></i>";
 					rec = rec+"<input type='hidden' id='"+list[i].id+"' value='"+JSON.stringify(list[i])+"'/>";
-					rec=rec+" "+list[i].accountNum+" Term Deposit at "+list[i].createTime+")";
+					rec=rec+" "+list[i].accountNum+" Term Deposit at "+new Date(list[i].createTime).toLocaleString()+")";
 					rec=rec+"</div>";
 					$("#data").append(rec);
 				}
@@ -80,7 +81,7 @@ function enquiryInfo(e,currentPage){
 				{
 					location.href=contextPath+"/login.html";
 				}
-				$('#enquiryForm').find('.alert-warning').html('Record Not Exist!'+$.errorHandler.prop(response.errorCode[0])).show();
+				$('#enquiryForm').find('.alert-warning').html('Record Not Exist!').show();
 			}
 			handlePageInfo(response.params);
 		}
@@ -122,3 +123,21 @@ function editReturn(){
 	$("#maintenance_header").show();
 	$("#maintenance_content").show();
 }
+Date.prototype.toLocaleString = function() {
+	var year = this.getFullYear();
+	var month = this.getMonth() + 1;
+    var date = this.getDate();
+    var hour = this.getHours();
+    var minute = this.getMinutes();
+    var second = this.getSeconds();
+    if (hour < 10){
+    	hour = "0" + hour;
+    }
+    if (minute < 10){
+    	minute = "0" + minute;
+    }
+    if (second < 10){
+    	second = "0" + second;
+    }
+	return  year+ "/" + month + "/" + date + "/ " + hour + ":" + minute + ":" + second;
+};

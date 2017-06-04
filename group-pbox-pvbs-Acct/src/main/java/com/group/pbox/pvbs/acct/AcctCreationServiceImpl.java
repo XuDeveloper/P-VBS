@@ -42,20 +42,16 @@ public class AcctCreationServiceImpl implements IAcctCreationService {
 
 		Account account = new Account();
 		account.setId(Utils.getUUID());
-		account.setAccountNumber(acctRequest.getAccountNumber());
 		account.setBranchNumber(acctRequest.getBranchNumber());
 		account.setClearingCode(acctRequest.getClearingCode());
-		account.setRealAccountNumber(acctRequest.getRealAccountNumber());
 		String acct = null;
-		int acctValid = acctMapper.accountValid(account);
-
-		if (acctValid > 0) {
-			acctResp.setResult(ErrorCode.RESPONSE_ERROR);
-			acctResp.getErrorCode().add(ErrorCode.ACCOUNT_HAVE_FOUND);
-			return acctResp;
-		}
 
 		String maxAcctNumber = acctMapper.fetchAcct();
+		
+		if(StringUtils.isBlank(maxAcctNumber)){
+		    maxAcctNumber="0";
+		}
+		
 		Integer newAcctNumber = Integer.valueOf(maxAcctNumber) + 1;
 
 		switch (newAcctNumber.toString().length()) {
